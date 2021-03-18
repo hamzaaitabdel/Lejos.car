@@ -82,23 +82,14 @@ public class h {
 
 	public void go(LineMap lm){
 		poseProvider = new OdometryPoseProvider(pilot);
-		int j=0;
-		
+		Navigator n = new Navigator(pilot);
 			
-		pilot.setLinearSpeed(1000);
-		 while(true){
-			 LCD.drawString("X= " + poseProvider.getPose().getX(), 0, 1);
-			 LCD.drawString("Y= " + poseProvider.getPose().getY(), 0, 2);
-			
-			 LCD.drawString(lm.inside(new Point(poseProvider.getPose().getX(),poseProvider.getPose().getY()))+"", 0, 3);
-			 if(!lm.inside(new Point(poseProvider.getPose().getX(),poseProvider.getPose().getY()))){
-				 pilot.stop();
-				 Delay.msDelay(1000);
-				 pilot.travel(-14);
-				 leftMotor.rotate(120);
-				 pilot.forward();
-			 }
-			 
+		n.goTo(80, 0);
+		Delay.msDelay(1000);
+		while(pilot.isMoving());
+			n.goTo(80,30);
+			Delay.msDelay(1000);
+			while(pilot.isMoving());	 
 //				SampleProvider sp  = us.getDistanceMode();
 //				while(pilot.isMoving()){
 //					sp.fetchSample(sample, 0);
@@ -127,4 +118,4 @@ public class h {
 		
 	}
 	
-}
+
